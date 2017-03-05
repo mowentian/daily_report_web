@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= 日报网站
+    link(rel="stylesheet" href="/stylesheets/lib/eleme.css")
+    script(src="/javascripts/lib/vue.js")
+    script(src="/javascripts/lib/eleme.js")
+    block head
+  body
+    div(id="app")
+      el-menu(theme="dark", :default-active="activeIndex",
+          class="el-menu-demo", mode="horizontal")
+        el-menu-item(index="1")
+          a(href="/")
+            | 提交日报
+        el-menu-item(index="2")
+          a(href="/summary")
+            | 查看汇总
+      block content
+  block scripts

@@ -1,0 +1,42 @@
+extends layout
+
+block head
+  script(src="/javascripts/lib/vue-resource.min.js")
+
+block content
+  el-form(ref="form", label-width="120px")
+    el-form-item(label="日期")
+      el-date-picker(type="date", v-model="form.date")
+    el-form-item(label="姓名")
+      el-input(v-model="form.name")
+    el-form-item(label="日报")
+      el-input(type="textarea", v-model="form.daily_report")
+    el-form-item
+      el-button(type="primary", @click="on_submit")
+        | 提交
+
+block scripts
+  script.
+    var app = new Vue({
+      el: '#app',
+      data: {
+        activeIndex: '1',
+        form: {
+          name: "",
+          date: new Date(),
+          daily_report: ""
+        }
+      },
+      methods: {
+        on_submit: function () {
+          console.log('submit!', this.form);
+          this.$http.post('/', this.form).then(function (res) {
+            console.log(res);
+            this.$message('提交成功');
+          }, function (err) {
+            console.error(err.body);
+            this.$message.error('提交失败: ' + err.body.message);
+          })
+        }
+      }
+    });

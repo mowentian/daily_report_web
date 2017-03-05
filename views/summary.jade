@@ -1,0 +1,32 @@
+//
+   Created by mowentian on 2017/3/5.
+
+extends layout
+
+block content
+  h1
+    el-card(class="box-card")
+      div(slot="header")
+        span(style="line-height: 36px;")
+          =date
+      div(v-for="report in reports", class="text item")
+        h4
+          | {{ report.name }}
+        pre
+          | {{ report.report }}
+
+block scripts
+  script.
+    var date = !{JSON.stringify(date)};
+    var reports = !{JSON.stringify(reports)};
+    console.log(date, reports);
+    var app = new Vue({
+      el: '#app',
+      data: {
+        activeIndex: '2',
+        reports: reports
+      },
+      methods: {
+
+      }
+    });
